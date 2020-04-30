@@ -17,9 +17,7 @@ class LoginSerializer(serializers.Serializer):
         email = attrs.get("email")
         password = attrs.get("password")
 
-        invalid_login_error_message = (
-            "Unable to log in with provided credentials."
-        )
+        invalid_login_error_message = "Unable to log in with provided credentials."
         try:
             username = User.objects.get(email__iexact=email).get_username()
         except User.DoesNotExist:

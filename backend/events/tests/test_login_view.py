@@ -10,9 +10,7 @@ class LoginTests(TestsMixin, TestCase):
     def test_login(self):
         payload = {"email": self.user.email, "password": self.password}
         self.post(self.login_url, data=payload, status_code=200)
-        self.assertEqual(
-            int(self.client.session["_auth_user_id"]), self.user.id
-        )
+        self.assertEqual(int(self.client.session["_auth_user_id"]), self.user.id)
 
     def test_login_invalid(self):
         payload = {

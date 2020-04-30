@@ -1,4 +1,4 @@
-FROM python:3.7-alpine AS base
+FROM python:3.8-alpine AS base
 
 # In theory, these environment variables should never need to be changed.
 # Make sure that you have a good reason to override them.

@@ -3,8 +3,11 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def api_root(request, format=None):
-    return Response({
-        'login': reverse('login', request=request, format=format),
-    })
+    return Response(
+        {
+            "login": reverse("login", request=request, format=format),
+            "users": reverse("user-list", request=request, format=format),
+        }
+    )

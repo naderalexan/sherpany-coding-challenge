@@ -12,11 +12,7 @@ from ..serializers import UserSerializer, LoginSerializer
 
 from .. import type_declarations as td
 
-sensitive_post_parameters_m = method_decorator(
-    sensitive_post_parameters(
-        "password",
-    )
-)
+sensitive_post_parameters_m = method_decorator(sensitive_post_parameters("password",))
 tags = ["Authentication"]
 
 

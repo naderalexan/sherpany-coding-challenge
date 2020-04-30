@@ -54,9 +54,8 @@ class TestsMixin(object):
         # Set up urls
         self.login_url = reverse("login")
         self.root_url = reverse("root")
+        self.user_list_url = reverse("user-list")
 
         email = "foo@bar.com"
-        self.user = UserFactory(
-            email=email, username=email
-        )
+        self.user = UserFactory(email=email, username=email)
         self.password = DUMMY_USER_PASSWORD

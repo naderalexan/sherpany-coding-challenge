@@ -25,4 +25,5 @@ else:
     """import custom classes here"""
     from django.contrib.auth.models import User
     from rest_framework.response import Response
+    from rest_framework.request import Request
     from .serializers import UserSerializer
