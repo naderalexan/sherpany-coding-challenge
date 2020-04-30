@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
 
 from .mixins import TestsMixin
@@ -18,7 +17,9 @@ class ParticipationViewSetTests(TestsMixin, TestCase):
 
         payload = {"event": event.id}
         self.post(self.participation_list_url, data=payload, status_code=201)
-        self.assertTrue(Participation.objects.filter(event=event, user=self.user).exists())
+        self.assertTrue(
+            Participation.objects.filter(event=event, user=self.user).exists()
+        )
 
     def test_create_unauthorized(self):
         event = EventFactory()

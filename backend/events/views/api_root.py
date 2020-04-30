@@ -8,7 +8,9 @@ def api_root(request, format=None):
     return Response(
         {
             "login": reverse("login", request=request, format=format),
-            "participations": reverse("participation-list", request=request, format=format),
+            "participations": reverse(
+                "participation-list", request=request, format=format
+            ),
             "users": reverse("user-list", request=request, format=format),
         }
     )

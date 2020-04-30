@@ -5,5 +5,9 @@ from .event import Event
 
 
 class Participation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="participations")
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="participations")
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="participations"
+    )
+    event = models.ForeignKey(
+        Event, on_delete=models.CASCADE, related_name="participations"
+    )
