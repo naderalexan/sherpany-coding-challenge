@@ -1,3 +1,7 @@
+# Custom additions
+.idea/
+
+# gitignore.io auto generated
 
 # Created by https://www.gitignore.io/api/django,python,pycharm
 # Edit at https://www.gitignore.io/?templates=django,python,pycharm
