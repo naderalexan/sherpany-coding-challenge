@@ -21,6 +21,7 @@ schema_view = get_schema_view(
 
 router = DefaultRouter()
 router.register(r"users", views.UserViewSet, basename="user")
+router.register(r"participations", views.ParticipationViewSet, basename="participation")
 
 urlpatterns = [
     path("", views.api_root, name="root"),

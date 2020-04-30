@@ -48,6 +48,9 @@ class TestsMixin(object):
     def delete(self, *args, **kwargs):
         return self.send_request("delete", *args, **kwargs)
 
+    def login(self):
+        self.client.login(username=self.user.email, password=self.password)
+
     def init(self):
         """Use in test by running `self.init()` in `setUp()`"""
 
@@ -55,6 +58,7 @@ class TestsMixin(object):
         self.login_url = reverse("login")
         self.root_url = reverse("root")
         self.user_list_url = reverse("user-list")
+        self.participation_list_url = reverse("participation-list")
 
         email = "foo@bar.com"
         self.user = UserFactory(email=email, username=email)
