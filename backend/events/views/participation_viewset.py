@@ -21,13 +21,18 @@ tags = ["Participation"]
         responses={200: UserSerializer()},
     ),
 )
-class ParticipationViewSet(mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+class ParticipationViewSet(
+    mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet
+):
     # `IsOwner` permission is not really needed here, since the queryset filters
     # over logged in user, that being said, it has three uses:
     # 1. Explicit permissions
     # 2. Security measure if `get_queryset`
     # 3. Prettier than adding comments in `get_queryset`
-    permission_classes = (IsAuthenticated, IsOwner, )
+    permission_classes = (
+        IsAuthenticated,
+        IsOwner,
+    )
     serializer_class = ParticipationSerializer
 
     def get_queryset(self) -> td.QuerySet:

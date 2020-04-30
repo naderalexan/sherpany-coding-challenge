@@ -59,6 +59,7 @@ class TestsMixin(object):
         self.root_url = reverse("root")
         self.user_list_url = reverse("user-list")
         self.participation_list_url = reverse("participation-list")
+        self.event_list_url = reverse("event-list")
 
         email = "foo@bar.com"
         self.user = UserFactory(email=email, username=email)

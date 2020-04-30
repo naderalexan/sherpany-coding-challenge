@@ -11,6 +11,7 @@ def api_root(request, format=None):
             "participations": reverse(
                 "participation-list", request=request, format=format
             ),
+            "events": reverse("event-list", request=request, format=format),
             "users": reverse("user-list", request=request, format=format),
         }
     )
