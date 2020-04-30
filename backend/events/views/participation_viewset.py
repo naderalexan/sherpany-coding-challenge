@@ -12,15 +12,6 @@ from .. import type_declarations as td
 tags = ["Participation"]
 
 
-@method_decorator(
-    name="create",
-    decorator=swagger_auto_schema(
-        tags=tags,
-        operation_summary="Create Participation",
-        operation_description="",
-        responses={200: UserSerializer()},
-    ),
-)
 class ParticipationViewSet(
     mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet
 ):
