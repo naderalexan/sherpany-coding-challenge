@@ -8,6 +8,7 @@ import typing as t
 import sys
 
 
+
 class Exporter:
     """https://mail.python.org/pipermail/python-ideas/2012-May/014969.html"""
 
@@ -27,3 +28,4 @@ else:
     from rest_framework.response import Response
     from rest_framework.request import Request
     from .serializers import UserSerializer
+    from django.db.models.query import QuerySet

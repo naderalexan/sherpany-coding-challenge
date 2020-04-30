@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from .mixins import TestsMixin
 
-from ..factories import EventFactory
+from ..factories import EventFactory, ParticipationFactory
 from ..models import Participation
 
 
@@ -26,3 +26,23 @@ class ParticipationViewSetTests(TestsMixin, TestCase):
 
         payload = {"event": event.id}
         self.post(self.participation_list_url, data=payload, status_code=403)
+
+    def test_delete(self):
+        participation = ParticipationFactory(user=self.user)
+
+        self.login()
+
+        url = f"{self.participation_list_url}{participation.id}/"
+        self.delete(url, status_code=204)
+        self.assertFalse(Participation.objects.filter(id=participation.id).exists())
+
+    def test_delete_unauthorized(self):
+        participation = ParticipationFactory()
+
+        url = f"{self.participation_list_url}{participation.id}/"
+        self.delete(url, status_code=403)
+        self.assertTrue(Participation.objects.filter(id=participation.id).exists())
+
+        self.login()
+        self.delete(url, status_code=404)
+        self.assertTrue(Participation.objects.filter(id=participation.id).exists())
