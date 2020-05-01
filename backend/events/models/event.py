@@ -7,3 +7,7 @@ class Event(models.Model):
     title = models.CharField(max_length=64)
     description = models.TextField()
     date = models.DateField()
+    num_participants = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ("-date",)

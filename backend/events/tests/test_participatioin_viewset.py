@@ -21,6 +21,9 @@ class ParticipationViewSetTests(TestsMixin, TestCase):
             Participation.objects.filter(event=event, user=self.user).exists()
         )
 
+        event.refresh_from_db()
+        self.assertEqual(event.num_participants, 1)
+
     def test_create_unauthorized(self):
         event = EventFactory()
 
@@ -29,12 +32,16 @@ class ParticipationViewSetTests(TestsMixin, TestCase):
 
     def test_delete(self):
         participation = ParticipationFactory(user=self.user)
+        event = participation.event
 
         self.login()
 
         url = f"{self.participation_list_url}{participation.id}/"
         self.delete(url, status_code=204)
         self.assertFalse(Participation.objects.filter(id=participation.id).exists())
+
+        event.refresh_from_db()
+        self.assertEqual(event.num_participants, 0)
 
     def test_delete_unauthorized(self):
         participation = ParticipationFactory()
