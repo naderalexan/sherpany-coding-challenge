@@ -18,7 +18,7 @@ class ParticipationViewSet(
     # `IsOwner` permission is not really needed here, since the queryset filters
     # over logged in user, that being said, it has three uses:
     # 1. Explicit permissions
-    # 2. Security measure if `get_queryset`
+    # 2. Security measure if `get_queryset` gets changed
     # 3. Prettier than adding comments in `get_queryset`
     permission_classes = (
         IsAuthenticated,
