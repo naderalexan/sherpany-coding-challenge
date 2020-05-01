@@ -22,3 +22,22 @@ class EventViewSetTests(TestsMixin, TestCase):
 
     def test_create_unauthorized(self):
         self.post(self.event_list_url, data=self.event_dict, status_code=403)
+
+    def test_update_event(self):
+        event = EventFactory(owner=self.user)
+
+        self.login()
+
+        url = f"{self.event_list_url}{event.id}/"
+        self.patch(url, data=self.event_dict, status_code=200)
+        self.assertTrue(Event.objects.filter(id=event.id, **self.event_dict).exists())
+
+    def test_update_event_unauthorized(self):
+        # creates a new user as owner for event
+        event = EventFactory()
+
+        self.login()
+
+        url = f"{self.event_list_url}{event.id}/"
+        self.patch(url, data=self.event_dict, status_code=403)
+        self.assertFalse(Event.objects.filter(id=event.id, **self.event_dict).exists())

@@ -11,3 +11,9 @@ class Participation(models.Model):
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, related_name="participations"
     )
+
+    @property
+    def owner(self):
+        # Allows standardization of `IsOwner` permission
+        # across models
+        return self.user
