@@ -7,6 +7,7 @@ from rest_framework.reverse import reverse
 def api_root(request, format=None):
     return Response(
         {
+            "docs.yaml": reverse("docs", request=request, format=format),
             "login": reverse("login", request=request, format=format),
             "participations": reverse(
                 "participation-list", request=request, format=format

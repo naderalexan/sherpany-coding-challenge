@@ -10,6 +10,7 @@ class EventViewSet(
     mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
     mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
     permission_classes = (IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)

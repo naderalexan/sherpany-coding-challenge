@@ -10,7 +10,11 @@ tags = ["Participation"]
 
 
 class ParticipationViewSet(
-    mixins.CreateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet
+    mixins.CreateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
 ):
     # `IsOwnerOrReadOnly` permission is not really needed here, since the queryset filters
     # over logged in user, that being said, it has three uses:

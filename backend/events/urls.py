@@ -27,5 +27,5 @@ router.register(r"participations", views.ParticipationViewSet, basename="partici
 urlpatterns = [
     path("", views.api_root, name="root"),
     path("auth/login/", views.LoginView.as_view(), name="login"),
-    path("docs", schema_view.with_ui(cache_timeout=0),),
+    path("docs.yaml", schema_view.without_ui(cache_timeout=0), name="docs"),
 ] + router.urls

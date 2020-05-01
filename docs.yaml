@@ -1,0 +1,307 @@
+swagger: '2.0'
+info:
+  title: events API
+  description: events API
+  termsOfService: https://en.wikipedia.org/wiki/MIT_License#License_terms
+  contact:
+    email: alexan.nader@gmail.com
+  license:
+    name: MIT License
+  version: v1
+host: localhost
+schemes:
+  - http
+basePath: /
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+  - Basic: []
+paths:
+  /:
+    get:
+      operationId: _list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - ''
+    parameters: []
+  /auth/login/:
+    post:
+      operationId: auth_login_create
+      summary: Login
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - Authentication
+    parameters: []
+  /events/:
+    get:
+      operationId: events_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EventList'
+      tags:
+        - events
+    post:
+      operationId: events_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Event'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Event'
+      tags:
+        - events
+    parameters: []
+  /events/{id}/:
+    get:
+      operationId: events_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Event'
+      tags:
+        - events
+    put:
+      operationId: events_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Event'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Event'
+      tags:
+        - events
+    patch:
+      operationId: events_partial_update
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Event'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Event'
+      tags:
+        - events
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this event.
+        required: true
+        type: integer
+  /participations/:
+    get:
+      operationId: participations_list
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Participation'
+      tags:
+        - participations
+    post:
+      operationId: participations_create
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Participation'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Participation'
+      tags:
+        - participations
+    parameters: []
+  /participations/{id}/:
+    get:
+      operationId: participations_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Participation'
+      tags:
+        - participations
+    delete:
+      operationId: participations_delete
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - participations
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+  /users/:
+    post:
+      operationId: users_create
+      summary: Create User
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserCreate'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - Users
+    parameters: []
+definitions:
+  Login:
+    required:
+      - email
+      - password
+    type: object
+    properties:
+      email:
+        title: Email
+        type: string
+        format: email
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
+  User:
+    type: object
+    properties:
+      email:
+        title: Email address
+        type: string
+        format: email
+        maxLength: 254
+  EventList:
+    required:
+      - title
+      - date
+    type: object
+    properties:
+      title:
+        title: Title
+        type: string
+        maxLength: 64
+        minLength: 1
+      date:
+        title: Date
+        type: string
+        format: date
+      owner:
+        title: Owner
+        type: string
+        readOnly: true
+      numParticipants:
+        title: Num participants
+        type: integer
+        maximum: 2147483647
+        minimum: 0
+  Event:
+    required:
+      - title
+      - description
+      - date
+    type: object
+    properties:
+      title:
+        title: Title
+        type: string
+        maxLength: 64
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      date:
+        title: Date
+        type: string
+        format: date
+  Participation:
+    required:
+      - event
+    type: object
+    properties:
+      url:
+        title: Url
+        type: string
+        format: uri
+        readOnly: true
+      event:
+        title: Event
+        type: integer
+  UserCreate:
+    required:
+      - password
+    type: object
+    properties:
+      email:
+        title: Email address
+        type: string
+        format: email
+        maxLength: 254
+      password:
+        title: Password
+        type: string
+        maxLength: 128
+        minLength: 1
