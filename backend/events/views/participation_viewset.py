@@ -1,10 +1,7 @@
-from django.utils.decorators import method_decorator
-from drf_yasg.utils import swagger_auto_schema
-
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
-from ..serializers import UserSerializer, ParticipationSerializer
+from ..serializers import ParticipationSerializer
 from ..permissions import IsOwner
 
 from .. import type_declarations as td
