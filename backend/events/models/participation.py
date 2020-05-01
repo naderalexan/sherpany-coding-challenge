@@ -39,3 +39,6 @@ class Participation(models.Model):
         Event.objects.filter(id=self.event.id).update(
             num_participants=models.F("num_participants") - 1
         )
+
+    class Meta:
+        unique_together = ["user", "event"]

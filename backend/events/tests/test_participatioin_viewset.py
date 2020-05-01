@@ -24,6 +24,15 @@ class ParticipationViewSetTests(TestsMixin, TestCase):
         event.refresh_from_db()
         self.assertEqual(event.num_participants, 1)
 
+    def test_create_duplicate(self):
+        event = EventFactory()
+
+        self.login()
+
+        payload = {"event": event.id}
+        self.post(self.participation_list_url, data=payload, status_code=201)
+        self.post(self.participation_list_url, data=payload, status_code=400)
+
     def test_create_unauthorized(self):
         event = EventFactory()
 
